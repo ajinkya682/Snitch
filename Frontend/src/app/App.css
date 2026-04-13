@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+
+  --color-obsidian: #000000;
+  --color-charcoal: #0a0a0a;
+  --color-gold: #D4AF37;
+  --color-gold-light: #F9E2AF;
+  --color-gold-dark: #A68A2D;
+  --color-chrome: #e5e2e1;
+  --color-slate-muted: #999077;
+  
+  /* Fluid Typography & Spacing Scale */
+  --font-size-hero: clamp(3.5rem, 10vw + 1rem, 12rem);
+  --font-size-heading: clamp(2.5rem, 6vw + 1rem, 6rem);
+  --font-size-body: clamp(0.9rem, 0.5vw + 0.7rem, 1.1rem);
+  
+  --spacing-container: clamp(1.5rem, 5vw, 6rem);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-obsidian);
+    color: var(--color-chrome);
+    font-size: 16px; /* Base for rem */
+  }
+
+  body {
+    @apply font-sans antialiased;
+    font-size: var(--font-size-body);
+  }
+
+  ::selection {
+    background-color: var(--color-gold);
+    color: var(--color-obsidian);
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-obsidian);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1c1b1b;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gold-dark);
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+  }
+
+  .gold-gradient-text {
+    background: linear-gradient(to right, var(--color-gold-dark), var(--color-gold), var(--color-gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .btn-gold {
+    @apply relative overflow-hidden bg-gradient-to-r from-gold-dark via-gold to-gold-light text-obsidian font-bold tracking-widest uppercase py-4 px-6 md:px-8 rounded transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] hover:-translate-y-1 active:translate-y-0 text-center text-xs md:text-sm;
+  }
+  
+  .container-res {
+    @apply mx-auto px-[var(--spacing-container)];
+  }
+}
+
+/* Fluid Animation Classes */
+.animate-slide-up {
+  animation: slide-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
